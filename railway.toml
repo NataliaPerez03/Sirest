@@ -1,6 +1,4 @@
 [deploy]
 startCommand = "uvicorn backend.main:app --host 0.0.0.0 --port 8000"
-healthcheckPath = "/docs"
-
-[deploy.environmentVariables]
-PORT = "8000"
+healthcheckPath = "/health"
+healthcheckTimeout = 30

@@ -56,6 +56,13 @@ def require_admin_or_chef(user: dict = Depends(get_current_user)):
     return user
 
 
+# ─── HEALTH ───────────────────────────────────────────
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+
 # ─── AUTH ─────────────────────────────────────────────
 
 @app.post("/auth/login", response_model=TokenResponse)
