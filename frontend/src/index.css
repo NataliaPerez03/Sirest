@@ -1,0 +1,414 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F7F8;
+  --sidebar: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-hover: #F4F4F5;
+  --border: #E4E4E7;
+  --border-strong: #D1D1D6;
+  --text: #09090B;
+  --text-muted: #71717A;
+  --text-subtle: #A1A1AA;
+  --accent: #18181B;
+  --accent-hover: #3F3F46;
+  --accent-fg: #FFFFFF;
+  --danger: #DC2626;
+  --danger-bg: #FEF2F2;
+  --danger-border: #FECACA;
+  --warning: #D97706;
+  --warning-bg: #FFFBEB;
+  --warning-border: #FDE68A;
+  --success: #16A34A;
+  --success-bg: #F0FDF4;
+  --success-border: #BBF7D0;
+  --blue: #2563EB;
+  --blue-bg: #EFF6FF;
+  --blue-border: #BFDBFE;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg: 0 20px 48px rgba(0,0,0,0.10), 0 8px 20px rgba(0,0,0,0.06);
+  --font: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button { font-family: var(--font); cursor: pointer; border: none; outline: none; }
+
+input, select, textarea {
+  font-family: var(--font);
+  font-size: 14px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(24,24,27,0.06);
+}
+
+input::placeholder, textarea::placeholder { color: var(--text-subtle); }
+select option { background: var(--surface); color: var(--text); }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
+
+/* ─── Animation Keyframes ─────────────────────────────── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes dialogIn {
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.96); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ─── Animation Classes ───────────────────────────────── */
+
+.anim-fade  { animation: fadeIn 0.25s ease forwards; }
+.anim-up    { animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.anim-scale { animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.anim-toast { animation: toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.anim-overlay { animation: overlayIn 0.2s ease forwards; }
+
+/* Staggered card animation */
+.card-grid > *:nth-child(1)  { animation-delay: 0.00s; }
+.card-grid > *:nth-child(2)  { animation-delay: 0.04s; }
+.card-grid > *:nth-child(3)  { animation-delay: 0.08s; }
+.card-grid > *:nth-child(4)  { animation-delay: 0.12s; }
+.card-grid > *:nth-child(5)  { animation-delay: 0.16s; }
+.card-grid > *:nth-child(6)  { animation-delay: 0.20s; }
+.card-grid > *:nth-child(7)  { animation-delay: 0.24s; }
+.card-grid > *:nth-child(8)  { animation-delay: 0.28s; }
+.card-grid > *:nth-child(9)  { animation-delay: 0.32s; }
+.card-grid > *:nth-child(10) { animation-delay: 0.36s; }
+.card-grid > *:nth-child(n+11) { animation-delay: 0.40s; }
+
+/* Card hover effect */
+.table-card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.table-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+}
+
+.product-row {
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.product-row:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Nav items */
+.nav-item {
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.nav-item:hover {
+  background: var(--surface-hover) !important;
+  color: var(--text) !important;
+}
+
+/* Buttons */
+.btn-ghost {
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn-ghost:hover {
+  background: var(--surface-hover) !important;
+  color: var(--text) !important;
+}
+
+.btn-primary {
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-secondary {
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.btn-secondary:hover {
+  background: var(--surface-hover) !important;
+  border-color: var(--border-strong) !important;
+}
+
+.btn-danger {
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.btn-danger:hover:not(:disabled) {
+  background: #B91C1C !important;
+  transform: translateY(-1px);
+}
+
+/* Change estado button */
+.btn-change {
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.btn-change:hover {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border-color: var(--accent) !important;
+}
+
+/* ─── Radix Dialog ─────────────────────────────────── */
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.30);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1000;
+  animation: overlayIn 0.2s ease forwards;
+}
+
+.dialog-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1001;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  width: calc(100% - 48px);
+  max-width: 460px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: dialogIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  outline: none;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.dialog-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+
+.dialog-close {
+  background: var(--surface-hover);
+  border: 1.5px solid var(--border) !important;
+  color: var(--text-muted);
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.dialog-close:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+/* ─── Radix Select ─────────────────────────────────── */
+
+.select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  font-family: var(--font);
+  font-size: 14px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.select-trigger:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(24,24,27,0.06);
+}
+.select-trigger[data-placeholder] { color: var(--text-subtle); }
+
+.select-icon {
+  color: var(--text-muted);
+  display: flex;
+  flex-shrink: 0;
+}
+
+.select-content {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  z-index: 2000;
+  min-width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
+  overflow: hidden;
+  animation: scaleIn 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.select-viewport {
+  padding: 4px;
+}
+
+.select-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: background 0.1s ease;
+}
+.select-item[data-highlighted] {
+  background: var(--surface-hover);
+}
+.select-item[data-state="checked"] {
+  font-weight: 600;
+}
+
+.select-item-indicator {
+  color: var(--accent);
+  display: flex;
+  flex-shrink: 0;
+}
+
+/* ─── Radix Toast ──────────────────────────────────── */
+
+.toast-viewport {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: auto;
+  max-width: 360px;
+  list-style: none;
+  outline: none;
+}
+
+.toast {
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  letter-spacing: -0.1px;
+  animation: toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.toast--success { background: var(--accent); }
+.toast--error   { background: var(--danger); }
+
+.toast__body {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ─── Radix Avatar ─────────────────────────────────── */
+
+.avatar-root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatar-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-hover);
+  border: 1.5px solid var(--border);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+/* ─── Radix Label ──────────────────────────────────── */
+
+.field-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.1px;
+  cursor: default;
+}
