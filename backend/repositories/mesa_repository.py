@@ -1,5 +1,3 @@
-from backend.database.connection import get_connection
-
 class MesaRepository:
 
     def __init__(self, connection):

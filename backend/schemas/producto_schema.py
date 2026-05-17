@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
 
-# Lo que el usuario envía al API para crear un producto
 class ProductoCreateRequest(BaseModel):
     nombre: str
     id_categoria: int
@@ -10,7 +9,6 @@ class ProductoCreateRequest(BaseModel):
     stock_critico: int
     descripcion: Optional[str] = None
 
-# Lo que el API responde cuando el producto se crea exitosamente
 class ProductoCreateResponse(BaseModel):
     mensaje: str
     id_producto: int
@@ -20,3 +18,15 @@ class ProductoCreateResponse(BaseModel):
     stock_critico: int
     disponible: bool
     alerta_stock_critico: bool
+
+class ProductoUpdateRequest(BaseModel):
+    nombre: Optional[str] = None
+    id_categoria: Optional[int] = None
+    precio: Optional[float] = None
+    stock_actual: Optional[int] = None
+    stock_critico: Optional[int] = None
+    descripcion: Optional[str] = None
+
+class ProductoUpdateResponse(BaseModel):
+    mensaje: str
+    id_producto: int
