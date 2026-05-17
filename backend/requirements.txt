@@ -1,7 +1,7 @@
-fastapi
-uvicorn
-mysql-connector-python
-pydantic
-python-dotenv
-python-jose[cryptography]
-bcrypt
+fastapi==0.115.0
+uvicorn==0.30.6
+mysql-connector-python==9.0.0
+pydantic==2.9.2
+python-dotenv==1.0.1
+python-jose[cryptography]==3.3.0
+bcrypt==4.2.1
